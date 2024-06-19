@@ -1,0 +1,40 @@
+Execution Time: 47.143 ms
+EXPLAIN analyze SELECT count(iyear)
+FROM public.all_info;
+
+Execution Time: 19.535 ms
+EXPLAIN analyze SELECT count(*)
+FROM public.all_info;
+
+Execution Time: 45.361 ms
+EXPLAIN analyze 
+SELECT *
+FROM public.all_info 
+where iyear = '1971';
+
+Execution Time: 38.295 ms
+EXPLAIN analyze 
+SELECT iyear
+FROM public.all_info 
+where iyear = '1971';
+
+Execution Time: 38.209 ms
+EXPLAIN analyze 
+SELECT iyear, country
+FROM public.all_info 
+where iyear = '1971';
+
+Execution Time: 53.758 ms
+EXPLAIN analyze
+SELECT iyear, count(iyear)
+FROM public.all_info 
+GROUP BY iyear
+HAVING iyear != '1971' AND iyear != '1975';
+
+Improved query:
+Execution Time: 52.367 ms
+EXPLAIN analyze
+SELECT iyear, count(iyear)
+FROM public.all_info
+WHERE iyear != '1971' AND iyear != '1975'
+GROUP BY iyear
